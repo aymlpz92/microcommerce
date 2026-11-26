@@ -1,0 +1,19 @@
+info:
+  name: Modifier le stock
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/inventory/add/45576e86-2041-48d7-928c-d34ff85bcfba?newQuantity=25"
+  params:
+    - name: newQuantity
+      value: "25"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

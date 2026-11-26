@@ -1,0 +1,19 @@
+info:
+  name: Créer une commande
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://localhost:8902/order/45576e86-2041-48d7-928c-d34ff85bcfba?quantity=5
+  params:
+    - name: quantity
+      value: "5"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

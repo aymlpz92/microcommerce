@@ -1,0 +1,15 @@
+info:
+  name: Récupérer une commande
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: http://localhost:8902/order/933fa86f-34af-4de1-86d2-dba32b1beb3b
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
