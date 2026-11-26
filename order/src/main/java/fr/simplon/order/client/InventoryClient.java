@@ -19,8 +19,8 @@ public class InventoryClient {
         this.restClient = restClient.baseUrl(baseUrl).build();
     }
 
-    public String updateInventory(UUID productId, int quantity) {
-        return restClient.put()
+    public void updateInventory(UUID productId, int quantity) {
+        restClient.put()
                 .uri(uriBuilder -> uriBuilder
                         .path("/inventory/update/" + productId)
                         .queryParam("quantity", quantity)

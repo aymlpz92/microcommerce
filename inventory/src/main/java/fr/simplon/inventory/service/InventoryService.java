@@ -1,10 +1,12 @@
 package fr.simplon.inventory.service;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.naming.InsufficientResourcesException;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import fr.simplon.inventory.client.ProductClient;
@@ -61,7 +63,7 @@ public class InventoryService {
 
         int currentQuantity = inventory.getQuantity();
         if (currentQuantity < quantity) {
-            throw new InsufficientResourcesException("Stock insuffisant");
+            throw new BadRequestException("Stock insuffisant");
         }
 
         inventory.setQuantity(currentQuantity - quantity);

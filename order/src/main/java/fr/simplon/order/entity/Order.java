@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import org.hibernate.annotations.processing.Pattern;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity(name = "orders")
@@ -24,7 +26,7 @@ public class Order {
     private String name;
     private Integer quantity;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime = LocalDateTime.now();
 
 }

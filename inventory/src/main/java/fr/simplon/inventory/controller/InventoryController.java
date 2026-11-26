@@ -4,6 +4,7 @@ import java.awt.event.InputEvent;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import fr.simplon.inventory.entity.Inventory;
 import fr.simplon.inventory.entity.dtos.ProductDTO;
@@ -48,8 +51,12 @@ public class InventoryController {
     }
 
     @PutMapping("/update/{productId}")
-    public ResponseEntity<String> updateStock(@PathVariable UUID productId, @RequestParam int quantity) throws Exception {
-        inventoryService.updateStock(productId, quantity);
-        return ResponseEntity.ok("Stock updated for Product ID: " + productId + " with new quentity: " + quantity);
+    public ResponseEntity<HttpStatus> updateStock(@PathVariable UUID productId, @RequestParam int quantity) throws Exception {
+        try {
+            inventoryService.updateStock(productId, quantity);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (HttpClientErrorException.BadRequest exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage());
+        }
     }
 }
